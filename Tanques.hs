@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import Web.Scotty
-import Data.Aeson (ToJSON, object, (.=))
+import Data.Aeson
 import System.Random (randomRIO)
 import Control.Monad.IO.Class (liftIO)
 
@@ -11,7 +11,12 @@ data Tanque = Tanque
   , calibre :: String
   } deriving (Show)
 
-instance ToJSON Tanque
+instance ToJSON Tanque where
+  toJSON (Tanque nome' nacao' calibre') =
+    object [ "nome"    .= nome'
+           , "nação"   .= nacao'
+           , "calibre" .= calibre'
+           ]
 
 baseDeTanques :: [Tanque]
 baseDeTanques =
