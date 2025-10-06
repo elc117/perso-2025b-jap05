@@ -4,6 +4,7 @@ import Web.Scotty
 import Data.Aeson
 import System.Random (randomRIO)
 import Control.Monad.IO.Class (liftIO)
+import Data.Aeson.Encoding (pairs, pair)
 
 data Tanque = Tanque
   { nome    :: String
@@ -17,6 +18,12 @@ instance ToJSON Tanque where
            , "nação"   .= nacao'
            , "calibre" .= calibre'
            ]
+
+  toEncoding (Tanque nome' nacao' calibre') =
+    pairs ( "nome"    .= nome'
+         <> "nação"   .= nacao'
+         <> "calibre" .= calibre'
+          )
 
 baseDeTanques :: [Tanque]
 baseDeTanques =
