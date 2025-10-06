@@ -1,9 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric #-}
 
 import Web.Scotty
-import Data.Aeson (ToJSON)
-import GHC.Generics (Generic)
+import Data.Aeson (ToJSON, object, (.=))
 import System.Random (randomRIO)
 import Control.Monad.IO.Class (liftIO)
 
@@ -11,7 +9,7 @@ data Tanque = Tanque
   { nome    :: String
   , nacao   :: String
   , calibre :: String
-  } deriving (Show, Generic)
+  } deriving (Show)
 
 instance ToJSON Tanque
 
